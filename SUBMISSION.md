@@ -51,12 +51,12 @@ https://github.com/Azeru548/fxrp
 
 ## 9. Smart contract addresses / deployment details
 - `FxrpPay`:
-  `0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D`
-  ([Coston2](https://coston2-explorer.flare.network/address/0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D))
+  `0x29A63685474814fdaE2396251E1190aAF44aff72`
+  ([Coston2](https://coston2-explorer.flare.network/address/0x29A63685474814fdaE2396251E1190aAF44aff72))
 - `MockFXRP`:
   `0x40bE15A4469DCF86d4CB07059A137f2611867739`
   ([Coston2](https://coston2-explorer.flare.network/address/0x40bE15A4469DCF86d4CB07059A137f2611867739))
-- FTSOv2 used: `0x3d893C53D9e8056135C26C8c638B76C8b60Df726` (Coston2)
+- FTSOv2 used: `0xC4e9c78EA53db782E28f28Fdf80BaF59336B304d` (Coston2)
 - Feed: XRP/USD `0x015852502f55534400000000000000000000000000`
 - Test FXRP mint tx:
   [0xeaf237c...](https://coston2-explorer.flare.network/tx/0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494)

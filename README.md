@@ -36,7 +36,7 @@ into a real payment rail:
 
 ## Live deployment (Coston2)
 
-- `FxrpPay`: [`0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D`](https://coston2-explorer.flare.network/address/0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D)
+- `FxrpPay`: [`0x29A63685474814fdaE2396251E1190aAF44aff72`](https://coston2-explorer.flare.network/address/0x29A63685474814fdaE2396251E1190aAF44aff72)
 - `MockFXRP`: [`0x40bE15A4469DCF86d4CB07059A137f2611867739`](https://coston2-explorer.flare.network/address/0x40bE15A4469DCF86d4CB07059A137f2611867739)
 
 ## Repo layout
@@ -73,7 +73,7 @@ scripts/
    - RPC `https://coston2-api.flare.network/ext/C/rpc`
    - Chain ID `114`, currency `C2FLR`
 3. Get free gas: https://faucet.flare.network/coston2
-4. Deploy `FxrpPay` with constructor arg `0x3d893C53D9e8056135C26C8c638B76C8b60Df726`
+4. Deploy `FxrpPay` with constructor arg `0xC4e9c78EA53db782E28f28Fdf80BaF59336B304d`
    (FTSOv2 on Coston2). Note the deployed address.
 5. Deploy `MockFXRP.sol`, then `mint` test FXRP to your wallet.
 
@@ -97,9 +97,9 @@ Open `http://localhost:8080` in a browser.
    (`0x40bE15A4469DCF86d4CB07059A137f2611867739` on Coston2), click *Create
    payment link*, copy the link.
 3. **Pay** → open the link (or the *Pay invoice* tab), enter the FxrpPay
-   contract (`0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D`) + invoice id, *Load
+   contract (`0x29A63685474814fdaE2396251E1190aAF44aff72`) + invoice id, *Load
    invoice*, then *Approve & pay*. The wallet prompts for the FXRP transfer
-   (+ FLR oracle fee if USD-priced).
+   (the XRP/USD oracle fee is 0 on Coston2).
 4. Merchant → `withdraw(id)` on Remix to pull collected FXRP.
 
 ## Next steps / roadmap

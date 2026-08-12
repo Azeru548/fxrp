@@ -4,9 +4,10 @@ Last updated: Aug 12, 2026. Scratch notes to resume work quickly.
 
 ## Deployed contracts (Coston2)
 
-- **FxrpPay**: `0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D`
+- **FxrpPay** (CURRENT, correct oracle): `0x29A63685474814fdaE2396251E1190aAF44aff72`
+- **FxrpPay** (obsolete, stale oracle): `0x9D23bd20Ba9aFECB12181B7C8368CB26Ba9C296D` — DO NOT use
 - **MockFXRP** (test FXRP token): `0x40bE15A4469DCF86d4CB07059A137f2611867739`
-- FTSOv2 (constructor arg): `0x3d893C53D9e8056135C26C8c638B76C8b60Df726`
+- FTSOv2 (constructor arg): `0xC4e9c78EA53db782E28f28Fdf80BaF59336B304d` (RESOLVED from on-chain ContractRegistry — the previously used `0x3d893C...Df726` is STALE and makes `calculateFeeById` revert)
 - Feed: XRP/USD `0x015852502f55534400000000000000000000000000`
 
 ## Wallet / account

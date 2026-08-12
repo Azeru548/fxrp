@@ -253,7 +253,7 @@ async function loadInvoice() {
     $("iAmount").textContent =
       ethers.formatUnits(due, dec) + " FXRP (due)";
     $("iUsd").textContent =
-      inv.pricing === 1
+Number(inv.pricing) === 1
         ? "Priced in USD: $" + (Number(inv.amount) / 100).toFixed(2)
         : "Fixed amount: " + ethers.formatUnits(inv.amount, dec) + " FXRP";
     $("iPayee").textContent = "Merchant: " + inv.payee;
@@ -288,7 +288,7 @@ async function payInvoice() {
       await ap.wait();
     }
 
-    const fee = inv.pricing === 1 ? await contract.oracleFee() : 0n;
+    const fee = Number(inv.pricing) === 1 ? await contract.oracleFee() : 0n;
     setPayStatus(
       "Paying " + ethers.formatUnits(due, 18) + " FXRP" +
       (fee > 0n ? " + oracle fee " + ethers.formatEther(fee) + " C2FLR" : "") +
