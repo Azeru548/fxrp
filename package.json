@@ -1,0 +1,25 @@
+{
+  "name": "fxrp-pay",
+  "version": "1.0.0",
+  "description": "FXRP Pay - pay with XRP, settle on Flare. Payment links priced in USD via FTSOv2, settled in FXRP (FAssets).",
+  "license": "MIT",
+  "scripts": {
+    "check": "node scripts/compile-check.js",
+    "test": "node scripts/compile-check.js"
+  },
+  "devDependencies": {
+    "@flarenetwork/flare-periphery-contracts": "^0.1.52",
+    "@nomicfoundation/hardhat-ethers": "^4.0.15",
+    "@nomicfoundation/hardhat-toolbox": "^7.0.0",
+    "@openzeppelin/contracts": "^5.6.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^26.2.0",
+    "chai": "^4.5.0",
+    "dotenv": "^17.4.2",
+    "ethers": "^6.17.0",
+    "hardhat": "^3.12.0",
+    "solc": "^0.8.36",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}
