@@ -28,7 +28,7 @@ source. Funds settle as FXRP on Flare and the merchant withdraws on demand.
 - Deployed on: **Coston2** (Flare Testnet)
 
 ## 6. GitHub repo / technical materials
-[ ] repo URL
+https://github.com/Azeru548/fxrp
 
 ## 7. How the project uses Flare
 - **FAssets (FXRP)**: invoices are settled in FXRP, the FAsset that makes XRP
