@@ -1,4 +1,4 @@
-# Design — FXRP Pay (frontend)
+# Design — Rowan (frontend)
 
 <!-- impeccable:design-schema 1 -->
 

@@ -1,8 +1,8 @@
-# FXRP Pay
+# Rowan
 
 **Pay with XRP, settle on Flare.**
 
-FXRP Pay lets any merchant create a payment link — priced in **USD** (converted
+Rowan lets any merchant create a payment link — priced in **USD** (converted
 on-chain by the Flare **FTSOv2** XRP/USD price feed) or in a fixed amount of
 **FXRP** (the FAsset-wrapped XRP) — and lets any wallet pay it in one click.
 Funds settle as FXRP on Flare and the merchant withdraws when ready.
@@ -16,7 +16,7 @@ Products).
 
 XRP is the largest asset without native smart contracts, and FXRP brings it
 into EVM DeFi via Flare FAssets. But there is no easy way for an XRP/FXRP holder
-to *pay a merchant* in a stable, USD-denominated amount. FXRP Pay turns Flare
+to *pay a merchant* in a stable, USD-denominated amount. Rowan turns Flare
 into a real payment rail:
 
 - Merchants price in **USD** (what customers understand), settlement happens in

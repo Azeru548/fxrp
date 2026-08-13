@@ -3,7 +3,7 @@
 > Fill in the `[ ]` blanks and remove this note. Keep answers tight but specific.
 
 ## 1. Project name
-**FXRP Pay** — *Pay with XRP, settle on Flare.*
+**Rowan** — *Pay with XRP, settle on Flare.*
 
 ## 2. Selected bounty
 **Bounty 1 — Interoperable Asset Products** (FXRP, FAssets)

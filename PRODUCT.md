@@ -18,7 +18,7 @@ Existing static, no-build frontend: `frontend/index.html` + `frontend/app.js` (v
 
 ## Product Purpose
 
-FXRP Pay lets a merchant create a payment link priced in USD (converted on-chain by Flare FTSOv2 XRP/USD feed) or in a fixed FXRP amount, and lets any wallet pay it in one click. Funds settle as FXRP (the FAsset-wrapped XRP) on Flare; the merchant withdraws on demand.
+Rowan lets a merchant create a payment link priced in USD (converted on-chain by Flare FTSOv2 XRP/USD feed) or in a fixed FXRP amount, and lets any wallet pay it in one click. Funds settle as FXRP (the FAsset-wrapped XRP) on Flare; the merchant withdraws on demand.
 
 ## Positioning
 
@@ -43,7 +43,7 @@ Presentation also carries the hackathon framing: an explainer of why it uses Fla
 
 ## Brand Commitments
 
-Name: **FXRP Pay** — tagline **Pay with XRP, settle on Flare.**
+Name: **Rowan** — tagline **Pay with XRP, settle on Flare.**
 
 **Standing decision (light natural world, selected by user Aug 13 2026):** replace the dark fintech look (rejected as gimmicky) with a **light, grounded** theme: warm white / beige canvas, **nature green** as the primary action accent, **light orange** as a secondary warmth accent. Calm, honest, paper-and-garden; craft benchmark stays **Coinbase / Rainbow**-grade web3 payment UX. This is a binding brand commitment for the revamp.
 

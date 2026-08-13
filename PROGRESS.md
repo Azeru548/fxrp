@@ -1,4 +1,4 @@
-# FXRP Pay — Session Progress
+# Rowan — Session Progress
 
 Last updated: Aug 12, 2026. Scratch notes to resume work quickly.
 
