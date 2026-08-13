@@ -35,12 +35,12 @@ function shortAddr(a) {
 function setStatus(msg, ok) {
   const el = $("status");
   el.textContent = msg;
-  el.className = ok ? "ok" : "";
+  el.className = ok === true ? "ok" : ok === false ? "err" : "run";
 }
 function setPayStatus(msg, ok) {
   const el = $("payStatus");
   el.textContent = msg;
-  el.className = ok ? "ok" : "";
+  el.className = ok === true ? "ok" : ok === false ? "err" : "run";
 }
 
 // --- Wallet detection: EIP-6963 (modern) + legacy injected providers ---
@@ -113,7 +113,9 @@ function renderWalletList() {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "wallet-btn";
-    btn.innerHTML = (w.icon ? '<img class="wallet-icon" src="' + w.icon + '" alt="" />' : "") + "<span>" + w.name + "</span>";
+    btn.innerHTML = (w.icon ? '<img class="wallet-icon" src="' + w.icon + '" alt="" />' : "") +
+      "<span>" + w.name + "</span>" +
+      '<span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>';
     btn.onclick = () => connectWith(w.provider);
     list.appendChild(btn);
   }
@@ -173,6 +175,7 @@ async function connectWith(ep) {
   $("connect").textContent = shortAddr(account);
   $("app").style.display = "block";
   $("payee").placeholder = account;
+  $("footnote").style.display = "block";
   setStatus("Connected: " + account, true);
   closeWalletModal();
 }
@@ -186,12 +189,50 @@ function renderWalletError(msg) {
 $("connect").onclick = openWalletModal;
 
 $("pricing").onchange = () => {
-  $("amountLabel").textContent =
-    $("pricing").value === "1"
-      ? "Amount in USD cents (5000 = $50.00)"
-      : "Amount in FXRP (18 decimals, e.g. 50000000000000000000 = 50 FXRP)";
-  if ($("pricing").value === "0") $("amount").value = "50000000000000000000";
+  $("amountPrefix").textContent = $("pricing").value === "1" ? "$" : "FXRP";
+  if ($("pricing").value === "1") {
+    $("amount").value = "5000";
+    $("amountLabel").textContent = "Amount in USD";
+  } else {
+    $("amount").value = "50000000000000000000";
+    $("amountLabel").textContent = "Amount in FXRP";
+  }
+  updateAmountHint();
 };
+
+function updateAmountHint() {
+  const p = $("pricing").value;
+  const raw = $("amount").value.trim();
+  if (p === "1") {
+    $("amountHint").textContent = pctHint(raw);
+  } else {
+    $("amountHint").textContent = "";
+  }
+}
+function pctHint(cents) {
+  const n = Number(cents || "0");
+  return Number.isNaN(n) ? "$0.00" : "$" + (n / 100).toFixed(2);
+}
+$("amount").addEventListener("input", updateAmountHint);
+
+function setTestToken() {
+  $("token").value = "0x40bE15A4469DCF86d4CB07059A137f2611867739";
+  setStatus("Test FXRP token pre-filled (Coston2).", true);
+}
+
+async function copyLink() {
+  const text = $("paylink").title || "";
+  const base = location.origin + location.pathname;
+  const full = text.startsWith("http") ? text : text ? base + text : "";
+  if (!full.includes("#/pay")) return setStatus("No link to copy yet.", false);
+  try {
+    await navigator.clipboard.writeText(full);
+    $("copyBtn").textContent = "Copied ✓";
+    setTimeout(() => { $("copyBtn").textContent = "Copy link"; }, 1800);
+  } catch {
+    setStatus("Could not copy automatically — select the link above.", false);
+  }
+}
 
 async function createInvoice() {
   const pricing = Number($("pricing").value);
@@ -199,9 +240,9 @@ async function createInvoice() {
   const memo = $("memo").value.trim();
   const payee = $("payee").value.trim() || account;
   const token = $("token").value.trim();
-  if (!amount || !token) return setStatus("Fill in amount and token address.");
+  if (!amount || !token) return setStatus("Fill in amount and token address.", false);
   if (!ethers.isAddress(token) || !ethers.isAddress(payee)) {
-    return setStatus("Invalid address.");
+    return setStatus("Invalid address.", false);
   }
 
   setStatus("Creating invoice\u2026");
@@ -220,12 +261,12 @@ async function createInvoice() {
       .find((p) => p && p.name === "InvoiceCreated");
     const id = ev ? ev.args.id.toString() : "?";
     const link = location.href.split("#")[0] + "#/pay?c=" + contract.target + "&id=" + id;
-    $("paylink").style.display = "block";
+    $("linkBlock").style.display = "block";
     $("paylink").textContent = "Payment link: " + link;
     $("paylink").title = link;
     setStatus("Invoice #" + id + " created. Tx: " + receipt.hash, true);
   } catch (e) {
-    setStatus("Error: " + (e.shortMessage || e.message || e));
+    setStatus("Error: " + (e.shortMessage || e.message || e), false);
   }
 }
 $("createBtn").onclick = createInvoice;
@@ -242,32 +283,33 @@ async function loadInvoice() {
   try {
     const contract = promptContract();
     const id = $("pId").value.trim();
-    if (id === "") return setPayStatus("Enter an invoice id.");
+    if (id === "") return setPayStatus("Enter an invoice id.", false);
     const inv = await contract.invoices(id);
     const due = await contract.getDue(id);
     const paid = await contract.isPaid(id);
     const token = inv.token;
     const dec = await new ethers.Contract(token, TOKEN_ABI, provider).decimals();
 
-    $("iMemo").textContent = "Invoice #" + id + " \u2014 " + (inv.memo || "(no memo)");
-    $("iAmount").textContent =
-      ethers.formatUnits(due, dec) + " FXRP (due)";
-    $("iUsd").textContent =
-Number(inv.pricing) === 1
-        ? "Priced in USD: $" + (Number(inv.amount) / 100).toFixed(2)
-        : "Fixed amount: " + ethers.formatUnits(inv.amount, dec) + " FXRP";
-    $("iPayee").textContent = "Merchant: " + inv.payee;
     $("iStatus").textContent = paid
-      ? "Status: PAID"
+      ? "Paid"
       : inv.open
-        ? "Status: open \u2014 payments accepted"
-        : "Status: closed/cancelled";
+        ? "Open — accepting payments"
+        : "Closed";
+    $("invoiceInfo").dataset.state = paid ? "paid" : inv.open ? "open" : "closed";
+    $("iMemo").textContent = inv.memo || "Invoice #" + id;
+    $("iUsd").textContent =
+      Number(inv.pricing) === 1
+        ? "INVOICE #" + id + " · USD " + (Number(inv.amount) / 100).toFixed(2)
+        : "INVOICE #" + id;
+    $("iAmount").innerHTML =
+      ethers.formatUnits(due, dec) + ' <span class="wd">FXRP due</span>';
+    $("iPayee").innerHTML = "Merchant <b>" + inv.payee + "</b>";
     $("payBtn").style.display = inv.open && !paid ? "block" : "none";
     $("invoiceInfo").style.display = "block";
     $("payBtn").dataset.id = id;
     setPayStatus("");
   } catch (e) {
-    setPayStatus("Error: " + (e.shortMessage || e.message || e));
+    setPayStatus("Error: " + (e.shortMessage || e.message || e), false);
   }
 }
 $("loadBtn").onclick = loadInvoice;
@@ -299,7 +341,7 @@ async function payInvoice() {
     setPayStatus("Paid! Tx: " + receipt.hash, true);
     loadInvoice();
   } catch (e) {
-    setPayStatus("Error: " + (e.shortMessage || e.message || e));
+    setPayStatus("Error: " + (e.shortMessage || e.message || e), false);
   }
 }
 $("payBtn").onclick = payInvoice;

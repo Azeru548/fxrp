@@ -22,18 +22,18 @@ Last updated: Aug 12, 2026. Scratch notes to resume work quickly.
 - Fixed `connectWith` bug (provider stored as map key, not in value).
 - Chain-switch now tries `wallet_switchEthereumChain` then `wallet_addEthereumChain`, with manual fallback error.
 - Errors show inside the modal (`renderWalletError`).
+- Full UI revamp (impeccable skill): dark fintech canon, segmented Create/Pay tabs, USD↔FXRP input with live hint, invoice card with status pill (`data-state`), copy-link block, wallet modal restyle. See `DESIGN.md` / `PRODUCT.md`.
+- Stuck MetaMask tx resolved (Settings → Advanced → "Clear activity and nonce data"). The stuck tx was never mined; on-chain nonce 2 is the mint.
 
-## CURRENT BLOCKER — stuck MetaMask tx
+## Demo state (CURRENT, verified on-chain)
 
-- Pending "Interaction in progress" on Coston2 since **Aug 12, 12:19 PM** — blocks all new MetaMask transactions (error: "A previous transaction is still being signed or submitted").
-- **Fix A:** MetaMask → Activity → that tx → Cancel (confirm cancel tx).
-- **Fix B (bypass):** connect via a different wallet extension in the app's wallet modal (they have clean tx queues).
+- Invoice #0 on the **new** contract `0x29A636...aff72` = $20.00 USD pricing, **paid** 19.81 FXRP (`19814477051368041032` wei), `open=false`. Good demo evidence.
+- Bugs fixed: stale FTSOv2 address (redeploy) + BigInt `pricing === 1` compare (now `Number(inv.pricing) === 1`).
 
-## Next steps after unblocking
+## Next steps
 
-1. Clean the stuck tx (A or B above).
-2. Test full flow in `frontend/index.html` (serve via Live Server / http.server on :8080):
+1. Re-test full flow in `frontend/index.html` (serve via http.server on :8080):
    - Create invoice: USD 5000 ($50), token `0x40bE...7739`, merchant blank.
-   - Pay: FxrpPay `0x9D23...296D`, id `0`, Load → Approve & pay (needs C2FLR for oracle fee + USD pricing is on-chain via FTSOv2).
-   - Withdraw: Remix → FxrpPay → At Address `0x9D23...296D` → `withdraw(0)`.
-3. Fill `SUBMISSION.md` blanks: contract addresses, GitHub repo URL, demo video link, explorer txn links, traction signals.
+   - Pay: FxrpPay `0x29A6...aff72`, id `0`, Load → Approve & pay (needs C2FLR for oracle fee).
+   - Withdraw: Remix → FxrpPay → At Address `0x29A6...aff72` → `withdraw(0)` / `withdraw(1)`.
+2. Fill `SUBMISSION.md` blanks: demo video link, explorer txn links, traction signals.
