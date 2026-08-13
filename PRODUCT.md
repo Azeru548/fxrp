@@ -43,9 +43,9 @@ Presentation also carries the hackathon framing: an explainer of why it uses Fla
 
 ## Brand Commitments
 
-Name: **FXRP Pay** — tagline **Pay with XRP, settle on Flare.** No other visual commitment exists; the current dark-purple theme is an incumbent look, not a binding brand.
+Name: **FXRP Pay** — tagline **Pay with XRP, settle on Flare.**
 
-**Standing decision (canon, selected by user Aug 12 2026):** execute the category standard — a polished **dark fintech app** — at full fidelity without irony. Craft benchmark: **Rainbow / Coinbase**-grade web3 wallet/payment UX (audible, precise, premium). This is a binding brand commitment for the revamp.
+**Standing decision (light natural world, selected by user Aug 13 2026):** replace the dark fintech look (rejected as gimmicky) with a **light, grounded** theme: warm white / beige canvas, **nature green** as the primary action accent, **light orange** as a secondary warmth accent. Calm, honest, paper-and-garden; craft benchmark stays **Coinbase / Rainbow**-grade web3 payment UX. This is a binding brand commitment for the revamp.
 
 ## Evidence on Hand
 

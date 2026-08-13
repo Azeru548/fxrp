@@ -3,28 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0b0d13" />
+<meta name="theme-color" content="#faf8f3" />
 <title>FXRP Pay — Pay with XRP, settle on Flare</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233a63f5'/%3E%3Cpath d='M9 23 23 9M23 23 9 9' stroke='%23fff' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232e6b4e'/%3E%3Cpath d='M9 23 23 9M23 23 9 9' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='9' cy='23' r='2.4' fill='%23f7a24c' stroke='none'/%3E%3Ccircle cx='23' cy='9' r='2.4' fill='%23f7a24c' stroke='none'/%3E%3C/svg%3E" />
 <script src="ethers.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0b0d13;
-    --bg1: #11141d;
-    --bg2: #161a26;
-    --bg3: #1c2130;
-    --line: #222837;
-    --line2: #2d3547;
-    --text: #edf1fa;
-    --text2: #c3c9d9;
-    --muted: #8b93a7;
-    --btn: #3a63f5;
-    --btn-hi: #4f74ff;
-    --accent: #8ea5ff;
-    --ok: #34d399;
-    --warn: #fbbf24;
-    --danger: #f87171;
-    --ring: rgba(74, 106, 255, 0.55);
+    --bg: #f7f5ef;
+    --bg1: #ffffff;
+    --bg2: #fbfaf6;
+    --bg3: #efede4;
+    --line: #e7e4d9;
+    --line2: #dad6c9;
+    --text: #1f2a23;
+    --text2: #4c5a50;
+    --muted: #7c887e;
+    --green: #2e6b4e;
+    --green-hi: #245a40;
+    --orange: #e08b3c;
+    --orange-deep: #a8621f;
+    --orange-soft: #f5ecdd;
+    --ok: #2f8f5b;
+    --warn: var(--orange);
+    --danger: #c4523f;
+    --ring: rgba(46, 107, 78, 0.45);
+    --shadow-k: rgba(53, 60, 48, 0.14);
     --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "Consolas", Menlo, monospace;
   }
   * { box-sizing: border-box; }
@@ -32,8 +35,7 @@
   body {
     font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background:
-      radial-gradient(900px 520px at 18% -8%, rgba(58, 99, 245, 0.13), transparent 60%),
-      radial-gradient(720px 460px at 96% 4%, rgba(142, 165, 255, 0.08), transparent 55%),
+      radial-gradient(900px 480px at 50% -12%, rgba(46, 107, 78, 0.06), transparent 62%),
       var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -63,8 +65,8 @@
     width: 34px; height: 34px;
     border-radius: 10px;
     display: grid; place-items: center;
-    background: var(--btn);
-    box-shadow: 0 4px 14px rgba(58, 99, 245, 0.4);
+    background: var(--green);
+    box-shadow: 0 3px 10px rgba(46, 107, 78, 0.28);
   }
   .brand-mark svg { display: block; }
   .brand-name { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
@@ -73,14 +75,14 @@
   .conn { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .conn-icon { display: grid; place-items: center; color: var(--muted); flex: none; }
   #connect {
-    appearance: none; border: 1px solid var(--line2); background: var(--bg2); color: var(--text);
+    appearance: none; border: 1px solid var(--line2); background: var(--bg1); color: var(--text);
     font: 600 13px/1 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     padding: 8px 13px; border-radius: 999px; cursor: pointer;
     font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     max-width: 150px;
     transition: background 0.16s, border-color 0.16s;
   }
-  #connect:hover { background: var(--bg3); border-color: var(--accent); }
+  #connect:hover { background: var(--bg3); border-color: var(--green); }
   #connect:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
   #connect:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -90,7 +92,7 @@
     border: 1px solid var(--line);
     border-radius: 18px;
     padding: 20px 18px 22px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 18px 44px rgba(0, 0, 0, 0.34);
+    box-shadow: 0 1px 2px var(--shadow-k), 0 18px 40px rgba(53, 60, 48, 0.08);
     animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   @keyframes rise {
@@ -120,7 +122,7 @@
     transition: color 0.15s, background 0.15s;
   }
   .nav a:hover { color: var(--text2); }
-  .nav a.active { background: var(--bg3); color: var(--text); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+  .nav a.active { background: var(--bg1); color: var(--green); box-shadow: 0 1px 3px rgba(53, 60, 48, 0.12); }
   .nav a:focus-visible { outline: 2px solid var(--ring); outline-offset: 0; }
 
   /* ── Fields ────────────────────────────────────────── */
@@ -143,10 +145,10 @@
     transition: border-color 0.15s, box-shadow 0.15s;
     font-variant-numeric: tabular-nums;
   }
-  input::placeholder { color: #6c7488; }
+  input::placeholder { color: #a3aca3; }
   input:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: var(--green);
     box-shadow: 0 0 0 3px var(--ring);
   }
   input.mono { font-family: var(--mono); font-size: 13px; letter-spacing: 0; }
@@ -155,19 +157,19 @@
   select {
     width: 100%;
     padding: 11px 34px 11px 12px;
-    background: var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238b93a7' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background: var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237c887e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
     border: 1px solid var(--line2);
     border-radius: 11px;
     color: var(--text);
     font: 14px/1.4 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-appearance: none; appearance: none; cursor: pointer;
   }
-  select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--ring); }
+  select:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--ring); }
 
   .input-affix { position: relative; }
   .input-affix .prefix {
     position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-    font-size: 14px; font-weight: 600; color: var(--muted); pointer-events: none;
+    font-size: 14px; font-weight: 700; color: var(--orange-deep); pointer-events: none;
   }
   .input-affix input { padding-left: 42px; }
 
@@ -184,7 +186,7 @@
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     font-variant-numeric: tabular-nums;
   }
-  .chip:hover { background: var(--bg3); color: var(--text); border-color: var(--accent); }
+  .chip:hover { background: var(--bg3); color: var(--text); border-color: var(--green); }
   .chip:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
   /* ── Buttons ───────────────────────────────────────── */
@@ -195,20 +197,20 @@
     padding: 13px 16px;
     border: 0;
     border-radius: 12px;
-    background: var(--btn);
+    background: var(--green);
     color: #fff;
     font: 700 15px/1.2 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     letter-spacing: -0.005em;
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(58, 99, 245, 0.32);
+    box-shadow: 0 2px 8px rgba(46, 107, 78, 0.28);
     transition: background 0.16s, transform 0.06s, box-shadow 0.16s;
     margin-top: 6px;
   }
-  .btn:hover { background: var(--btn-hi); }
+  .btn:hover { background: var(--green-hi); }
   .btn:active { transform: scale(0.99); }
   .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
-  .btn .spin { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: turn 0.7s linear infinite; }
+  .btn .spin { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: turn 0.7s linear infinite; }
   @keyframes turn { to { transform: rotate(360deg); } }
 
   .btn-ghost {
@@ -222,7 +224,7 @@
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
-  .btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--accent); }
+  .btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--green); }
   .btn-ghost:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
   /* ── Status line ───────────────────────────────────── */
@@ -254,7 +256,7 @@
     font-family: var(--mono);
     font-size: 12px;
     line-height: 1.5;
-    color: var(--accent);
+    color: var(--green);
     word-break: break-all;
     background: transparent;
   }
@@ -263,20 +265,20 @@
     appearance: none;
     display: inline-flex; align-items: center; gap: 6px;
     border: 1px solid var(--line2);
-    background: var(--bg2);
+    background: var(--bg1);
     color: var(--text2);
     font: 600 12.5px/1 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     padding: 7px 11px;
     border-radius: 9px;
     cursor: pointer;
   }
-  .copy-btn:hover { color: var(--text); border-color: var(--accent); }
+  .copy-btn:hover { color: var(--green); border-color: var(--green); }
 
   /* ── Invoice card ──────────────────────────────────── */
   .invoice-card {
     display: none;
     margin-top: 16px;
-    border: 1px solid var(--line2);
+    border: 1px solid var(--line);
     border-radius: 14px;
     background: var(--bg);
     overflow: hidden;
@@ -287,8 +289,8 @@
     font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
     padding: 4px 9px; border-radius: 999px;
   }
-  .invoice-card[data-state="paid"] .status-pill { color: var(--ok); background: rgba(52, 211, 153, 0.12); }
-  .invoice-card[data-state="open"] .status-pill { color: var(--accent); background: rgba(142, 165, 255, 0.12); }
+  .invoice-card[data-state="paid"] .status-pill { color: var(--ok); background: rgba(47, 143, 91, 0.12); }
+  .invoice-card[data-state="open"] .status-pill { color: var(--orange-deep); background: rgba(224, 139, 60, 0.14); }
   .invoice-card[data-state="closed"] .status-pill { color: var(--muted); background: var(--bg3); }
   .status-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
   .inv-memo { margin: 10px 0 2px; font-size: 14px; font-weight: 700; color: var(--text); }
@@ -299,7 +301,7 @@
     color: var(--text);
     font-variant-numeric: tabular-nums;
   }
-  .inv-amount .wd { color: var(--muted); font-size: 15px; font-weight: 600; }
+  .inv-amount .wd { color: var(--green); font-size: 15px; font-weight: 700; }
   .inv-secondary { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .inv-payee {
     margin-top: 11px;
@@ -316,13 +318,13 @@
     color: var(--muted);
   }
   .foot-note code { font-family: var(--mono); font-size: 11px; color: var(--text2); }
-  .foot-note b { color: var(--text2); font-weight: 600; }
+  .foot-note b { color: var(--green); font-weight: 700; }
 
   /* ── Wallet modal ──────────────────────────────────── */
   #walletModal {
     display: none;
     position: fixed; inset: 0;
-    background: rgba(5, 7, 12, 0.72);
+    background: rgba(38, 44, 36, 0.5);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     align-items: center; justify-content: center;
@@ -333,14 +335,14 @@
     width: 100%;
     max-width: 380px;
     background: var(--bg1);
-    border: 1px solid var(--line2);
+    border: 1px solid var(--line);
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 56px rgba(38, 44, 36, 0.24);
     animation: rise 260ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .wallet-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-  .wallet-head .icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--btn); color: #fff; flex: none; }
+  .wallet-head .icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--green); color: #fff; flex: none; }
   .wallet-card h3 { margin: 0; font-size: 16.5px; font-weight: 700; color: var(--text); }
   .muted { color: var(--muted); font-size: 12.5px; margin: 2px 0 14px; }
   #walletList { display: flex; flex-direction: column; gap: 8px; }
@@ -357,7 +359,7 @@
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s;
   }
-  .wallet-btn:hover { background: var(--bg3); border-color: var(--accent); }
+  .wallet-btn:hover { background: var(--bg3); border-color: var(--green); }
   .wallet-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 0; }
   .wallet-icon { width: 26px; height: 26px; border-radius: 6px; flex: none; }
   .wallet-btn .go { margin-left: auto; color: var(--muted); display: grid; place-items: center; }
@@ -365,14 +367,14 @@
     color: var(--danger);
     font-size: 12.5px; line-height: 1.5;
     padding: 11px 12px;
-    border: 1px solid rgba(248, 113, 113, 0.4);
-    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(196, 82, 63, 0.35);
+    background: rgba(196, 82, 63, 0.08);
     border-radius: 10px;
     word-break: break-word;
     white-space: pre-line;
   }
   .no-wallets { color: var(--muted); font-size: 13px; line-height: 1.5; padding: 6px 0; }
-  .no-wallets a { color: var(--accent); text-decoration: none; }
+  .no-wallets a { color: var(--green); text-decoration: none; }
   .no-wallets a:hover { text-decoration: underline; }
   .wallet-close {
     margin-top: 14px;
@@ -389,18 +391,21 @@
 </head>
 <body>
 <!--
-  FXRP PAY — DIRECTION CONTRACT (seed 138674d3)
-  THESIS: a disciplined dark fintech app for settling XRP on Flare; refuses the
-    neon-crypto-default in favor of Coinbase/Rainbow-grade restraint.
-  OWN-WORLD: near-black indigo-tinted slate, one blue action accent, hairline
-    1px borders, tabular numerals, system + mono pairs; the exchange is calm.
+  FXRP PAY — DIRECTION CONTRACT (seed 138674d3 · light natural canon)
+  THESIS: a calm, light fintech app for settling XRP on Flare; refuses the
+    neon-crypto-default and the gimmick-dark look in favor of an honest,
+    paper-and-garden palette.
+  OWN-WORLD: warm white / beige canvas, one nature-green action accent, one
+    light-orange warmth accent, hairline 1px borders, tabular numerals,
+    system + mono pairs; the exchange feels grounded, not theatrical.
   STORY: a merchant prices in USD, a wallet pays in FXRP, and the on-chain
     conversion via Flare FTSOv2 is legible at every step.
-  FIRST VIEWPORT: brand lockup left, wallet pill right; one centered panel
+  FIRST VIEWPORT: brand lockup left, wallet pill right; one white panel
     carrying a segmented Create/Pay control, the create form leading, and a
     live USD-price hint on the amount field.
-  FORM: canon (user-selected standard dark fintech), not the seed's assigned
-    boarding-pass world; craft bar set by Google Coinbase/Rainbow.
+  FORM: user-pinned light natural world (white, nature green, light orange,
+    beige) — not the dark canon it replaces; craft bar stays at
+    Coinbase/Rainbow.
   FINISH: unreviewed and undocumented is unfinished; this build ends with the
     finish review, the verdict, and DESIGN.md
 -->
@@ -408,7 +413,7 @@
   <header class="top">
     <div class="brand">
       <span class="brand-mark">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6"/><path d="M18 18 6 6"/><circle cx="18" cy="6" r="2" fill="#3a63f5" stroke="none"/><circle cx="6" cy="18" r="2" fill="#3a63f5" stroke="none"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6"/><path d="M18 18 6 6"/><circle cx="18" cy="6" r="2" fill="#e08b3c" stroke="none"/><circle cx="6" cy="18" r="2" fill="#e08b3c" stroke="none"/></svg>
       </span>
       <div class="brand-name">FXRP Pay<small>Pay with XRP · settle on Flare</small></div>
     </div>
