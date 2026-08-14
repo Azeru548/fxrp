@@ -38,6 +38,18 @@ into a real payment rail:
 
 - `FxrpPay`: [`0x29A63685474814fdaE2396251E1190aAF44aff72`](https://coston2-explorer.flare.network/address/0x29A63685474814fdaE2396251E1190aAF44aff72)
 - `MockFXRP`: [`0x40bE15A4469DCF86d4CB07059A137f2611867739`](https://coston2-explorer.flare.network/address/0x40bE15A4469DCF86d4CB07059A137f2611867739)
+- FTSOv2 (CONSTRUCTOR ARG): `0xC4e9c78EA53db782E28f28Fdf80BaF59336B304d` (Coston2, XRP/USD feed fee = 0)
+- MockFXRP mint tx: [`0xeaf237c...`](https://coston2-explorer.flare.network/tx/0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494)
+
+### Demo evidence
+
+The full create → pay → withdraw flow has been run live on Coston2 during the program:
+
+- Invoice #4: $50.00 USD → settled **49.943 FXRP** on-chain, closed
+  ([pay tx](https://coston2-explorer.flare.network/tx/0x8890dcb5bc8e77cb9cdb04951f0c0a01bc68f2390e18bf92fbaf88135418e7ce))
+- Invoice #0: $20.00 USD → settled **19.81 FXRP** on-chain, closed
+- Both bugs found through live testing (stale oracle address, frontend BigInt
+  comparison) fixed and shipped.
 
 ## Repo layout
 
@@ -88,7 +100,8 @@ cd frontend
 python -m http.server 8080        # or "py -m http.server 8080"
 ```
 
-Open `http://localhost:8080` in a browser.
+Open `http://localhost:8080` in a browser. The deployed contract and test token
+addresses are pre-filled, so you only need to connect a wallet.
 
 1. **Connect wallet** → a modal lists your installed wallet extensions
    (EIP-6963); pick one and approve. Getting prompted to switch to Coston2 is
@@ -101,6 +114,21 @@ Open `http://localhost:8080` in a browser.
    invoice*, then *Approve & pay*. The wallet prompts for the FXRP transfer
    (the XRP/USD oracle fee is 0 on Coston2).
 4. Merchant → `withdraw(id)` on Remix to pull collected FXRP.
+
+## Integrate into your app
+
+Everything is one public contract with three calls, so any EVM app can accept
+FXRP payments without running infrastructure:
+
+- `createInvoice(payee, token, pricing, amount, memo)` — merchant creates a link
+  and gets an invoice id.
+- `pay(id)` — any wallet approves the token and pays the exact due.
+- `withdraw(id)` — merchant pulls the settled FXRP.
+
+The **payment link is the integration point**: link format
+`#/pay?c=<FxrpPay address>&id=<invoice id>`. Drop it into any checkout, email,
+or QR code — the payer lands in Rowan with the invoice pre-loaded and pays in
+one click. The ABI lives in `frontend/app.js`. No server or API to run.
 
 ## Next steps / roadmap
 

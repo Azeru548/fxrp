@@ -1,6 +1,6 @@
 # Flare Summer Signal — Submission
 
-> Fill in the `[ ]` blanks and remove this note. Keep answers tight but specific.
+> Fill in the demo video link and any optional signals, then remove this note. Keep answers tight but specific.
 
 ## 1. Project name
 **Rowan** — *Pay with XRP, settle on Flare.*
@@ -24,7 +24,7 @@ source. Funds settle as FXRP on Flare and the merchant withdraws on demand.
 - Frontend (no build step; run `python -m http.server 8080` or VS Code Live
   Server, then open `http://localhost:8080`, connect a wallet, and pay the link):
   `frontend/index.html`
-- Demo video: [ ] (record a 2–3 min Loom screen capture: create invoice → pay → withdraw)
+- Demo video: **paste link here** (2–3 min screen capture: create invoice → pay → withdraw)
 - Deployed on: **Coston2** (Flare Testnet)
 
 ## 6. GitHub repo / technical materials
@@ -46,8 +46,13 @@ https://github.com/Azeru548/fxrp
   handling and atomic refund of excess.
 - **New UX:** wallet-selector modal (EIP-6963) so the demo works with any EVM
   wallet extension, not just MetaMask.
-- **Tested:** deployed on Coston2, create → pay → withdraw flow. [ ] link to
-  explorer txns
+- **Tested:** live create → pay → withdraw on Coston2, with explorer-proof
+  transactions:
+  - Invoice #4: $50.00 USD → **49.943 FXRP** paid, closed
+    ([pay tx](https://coston2-explorer.flare.network/tx/0x8890dcb5bc8e77cb9cdb04951f0c0a01bc68f2390e18bf92fbaf88135418e7ce))
+  - Invoice #0: $20.00 USD → **19.81 FXRP** paid, closed
+  - Test FXRP mint
+    ([tx](https://coston2-explorer.flare.network/tx/0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494))
 
 ## 9. Smart contract addresses / deployment details
 - `FxrpPay`:
@@ -60,6 +65,8 @@ https://github.com/Azeru548/fxrp
 - Feed: XRP/USD `0x015852502f55534400000000000000000000000000`
 - Test FXRP mint tx:
   [0xeaf237c...](https://coston2-explorer.flare.network/tx/0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494)
+- First full-payment tx:
+  [0x8890dcb...](https://coston2-explorer.flare.network/tx/0x8890dcb5bc8e77cb9cdb04951f0c0a01bc68f2390e18bf92fbaf88135418e7ce)
 
 ## 10. Roadmap / next steps
 1. Flare Smart Accounts — pay from an XRPL wallet directly (XRP → FXRP → pay).
@@ -71,6 +78,8 @@ https://github.com/Azeru548/fxrp
 
 ## Optional signals (help judges a lot — fill what you can)
 - **Network:** Coston2 ✔ (Songbird/Mainnet planned).
-- **User acquisition / testing / feedback:** [ ] e.g. X XRP holders tested, N
-  demo invoices, merchant feedback.
+- **User acquisition / testing / feedback:** 1 end-to-end demo run on Coston2
+  (create → pay → withdraw), 3 live invoices exercised, including a $50.00 USD
+  invoice settled to 49.943 FXRP. Two real bugs found and fixed during testing
+  (stale FTSOv2 oracle address; frontend BigInt comparison).
 - **Traction:** [ ] pilot users, community interest, partner conversations.

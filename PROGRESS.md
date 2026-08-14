@@ -1,6 +1,12 @@
 # Rowan — Session Progress
 
-Last updated: Aug 12, 2026. Scratch notes to resume work quickly.
+Last updated: Aug 14, 2026. Scratch notes to resume work quickly.
+
+## Status: READY FOR SUBMISSION
+
+- Demo recorded (video being edited), README + SUBMISSION.md updated with live
+  on-chain evidence, repo pushed to `github.com/Azeru548/fxrp`.
+- Remaining: paste demo video link into SUBMISSION.md §5, then submit.
 
 ## Deployed contracts (Coston2)
 
@@ -13,7 +19,8 @@ Last updated: Aug 12, 2026. Scratch notes to resume work quickly.
 ## Wallet / account
 
 - MetaMask Account 1: `0x9b69143c90cfbed463556c73f8495e4ed9efbced`
-- Has **50 test FXRP** minted (confirmed on-chain, tx `0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494`).
+- Test FXRP minted multiple times; current balance ~130 T-FXRP (mint tx
+  `0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494`).
 
 ## Frontend changes made this session
 
@@ -22,18 +29,26 @@ Last updated: Aug 12, 2026. Scratch notes to resume work quickly.
 - Fixed `connectWith` bug (provider stored as map key, not in value).
 - Chain-switch now tries `wallet_switchEthereumChain` then `wallet_addEthereumChain`, with manual fallback error.
 - Errors show inside the modal (`renderWalletError`).
-- Full UI revamp (impeccable skill): dark fintech canon, segmented Create/Pay tabs, USD↔FXRP input with live hint, invoice card with status pill (`data-state`), copy-link block, wallet modal restyle. See `DESIGN.md` / `PRODUCT.md`.
-- Stuck MetaMask tx resolved (Settings → Advanced → "Clear activity and nonce data"). The stuck tx was never mined; on-chain nonce 2 is the mint.
+- Full UI revamp (impeccable skill): **light natural theme** (white/beige, nature
+  green, light orange) with a **quiet-brutalist** pass (chunky 2px borders, hard
+  offset shadows), segmented Create/Pay tabs, USD↔FXRP input with live hint,
+  invoice card with status pill (`data-state`), copy-link block, wallet modal
+  restyle. Brand renamed **FXRP Pay → Rowan**. See `DESIGN.md` / `PRODUCT.md`.
+- Stuck MetaMask tx resolved (Settings → Advanced → "Clear activity and nonce data").
+- Contract + token addresses now **pre-filled by default** and the app overwrites
+  a stale `localStorage` contract — fixes "Enter the FxrpPay contract address"
+  and paying into the obsolete contract.
 
 ## Demo state (CURRENT, verified on-chain)
 
-- Invoice #0 on the **new** contract `0x29A636...aff72` = $20.00 USD pricing, **paid** 19.81 FXRP (`19814477051368041032` wei), `open=false`. Good demo evidence.
-- Bugs fixed: stale FTSOv2 address (redeploy) + BigInt `pricing === 1` compare (now `Number(inv.pricing) === 1`).
+- Invoice #4: $50.00 USD → **49.943 FXRP** paid, closed. Pay tx
+  `0x8890dcb5bc8e77cb9cdb04951f0c0a01bc68f2390e18bf92fbaf88135418e7ce`.
+- Invoice #0: $20.00 USD → **19.81 FXRP** paid, closed
+  (`19814477051368041032` wei).
+- Bugs fixed: stale FTSOv2 address (redeploy) + BigInt `pricing === 1` compare
+  (now `Number(inv.pricing) === 1`).
 
 ## Next steps
 
-1. Re-test full flow in `frontend/index.html` (serve via http.server on :8080):
-   - Create invoice: USD 5000 ($50), token `0x40bE...7739`, merchant blank.
-   - Pay: FxrpPay `0x29A6...aff72`, id `0`, Load → Approve & pay (needs C2FLR for oracle fee).
-   - Withdraw: Remix → FxrpPay → At Address `0x29A6...aff72` → `withdraw(0)` / `withdraw(1)`.
-2. Fill `SUBMISSION.md` blanks: demo video link, explorer txn links, traction signals.
+1. Paste demo video link into `SUBMISSION.md` §5, then submit.
+2. Optional: withdraw paid invoice #4 via Remix to show the merchant step.

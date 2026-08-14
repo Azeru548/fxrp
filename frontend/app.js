@@ -367,5 +367,6 @@ function route() {
 window.addEventListener("hashchange", route);
 route();
 
-$("pContract").value = localStorage.getItem("fxrp_contract") || FCONTRACT;
+$("pContract").value = FCONTRACT;
 $("token").value = FTOKEN;
+localStorage.setItem("fxrp_contract", FCONTRACT);
