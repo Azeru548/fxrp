@@ -4,7 +4,11 @@ const NETWORK = {
   rpc: "https://coston2-api.flare.network/ext/C/rpc",
   currency: "C2FLR",
   explorer: "https://coston2-explorer.flare.network",
+  explorerUrl: (txOrAddr) => "https://coston2-explorer.flare.network/tx/" + txOrAddr,
 };
+
+const FCONTRACT = "0x29A63685474814fdaE2396251E1190aAF44aff72";
+const FTOKEN = "0x40bE15A4469DCF86d4CB07059A137f2611867739";
 
 const ABI = [
   "function createInvoice(address payee,address token,uint8 pricing,uint256 amount,string memo) returns (uint256)",
@@ -272,7 +276,7 @@ async function createInvoice() {
 $("createBtn").onclick = createInvoice;
 
 function promptContract() {
-  const addr = $("pContract").value.trim() || localStorage.getItem("fxrp_contract");
+  const addr = $("pContract").value.trim() || localStorage.getItem("fxrp_contract") || FCONTRACT;
   if (!addr) throw new Error("Enter the FxrpPay contract address.");
   localStorage.setItem("fxrp_contract", addr);
   return new ethers.Contract(addr, ABI, signer);
@@ -362,3 +366,6 @@ function route() {
 }
 window.addEventListener("hashchange", route);
 route();
+
+$("pContract").value = localStorage.getItem("fxrp_contract") || FCONTRACT;
+$("token").value = FTOKEN;

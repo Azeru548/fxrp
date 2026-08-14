@@ -4,10 +4,11 @@
 
 ## Visual World
 
-**Light natural fintech** at Coinbase/Rainbow craft. Warm white / beige canvas,
-nature green as the primary action accent, light orange as a secondary warmth
-accent, hairline borders, tabular numerals for money. Grounded, honest,
-paper-and-garden; expression never obscures the task (Operate mode).
+**Quiet-brutalist light natural fintech** at Coinbase/Rainbow craft. Warm
+white / beige canvas, nature green as the primary action accent, light orange
+as a secondary warmth accent, **chunky 2px borders + hard offset shadows**,
+tabular numerals for money. Grounded, direct, honest; expression never obscures
+the task (Operate mode).
 
 - Chosen by user (standing decision, Aug 13 2026), replacing the rejected dark
   canon: see the direction contract in `frontend/index.html` body comment and
@@ -15,9 +16,10 @@ paper-and-garden; expression never obscures the task (Operate mode).
 
 ## Tokens
 
-- Background: `--bg #f7f5ef` warm cream with one soft green radial at the top.
+- Background: `--bg #f7f5ef` warm cream, flat (no gradients).
 - Surface / panel: `--bg1 #ffffff`, input fill `--bg2 #fbfaf6`, hover `--bg3 #efede4`.
-- Lines: `--line #e7e4d9`, `--line2 #dad6c9`.
+- Lines: `--line #e7e4d9`, `--line2 #dad6c9`; structural borders are **2px solid
+  ink** (`var(--text)`) with hard offset shadows (`3–6px`).
 - Text: `--text #1f2a23` deep green-ink, secondary `--text2 #4c5a50`, muted
   `--muted #7c887e`, placeholder `#a3aca3`.
 - Nature green (primary action): `--green #2e6b4e`, hover `--green-hi #245a40`.
@@ -26,7 +28,9 @@ paper-and-garden; expression never obscures the task (Operate mode).
   hold 4.5:1 contrast, soft tint `--orange-soft #f5ecdd`.
 - State: success `--ok #2f8f5b`, warning `= --warn var(--orange)`, danger
   `--danger #c4523f`, focus ring `rgba(46,107,78,.45)`.
-- Shadows tinted `rgba(53,60,48,…)` so depth stays warm, never blue-gray.
+- Panel & key blocks carry a hard offset shadow (`6px 6px`); buttons/chips use
+  `3px 3px` that **presses flat on `:active`** (`translate(2px,2px)`).
+- Radius scale is tight (`4–10px`) — sharp, structural, never pill-soft.
 - Fonts: system sans stack (`ui-sans-serif`, -apple-system, Segoe UI, Roboto)
   + monospace stack (`--mono`: SF Mono, Cascadia, Segoe UI Mono, Consolas, Menlo)
   for addresses and the payment link. No webfont dependency (offline/locally
@@ -39,7 +43,8 @@ paper-and-garden; expression never obscures the task (Operate mode).
 - Header: brand mark (16px `X` in a green rounded square with two orange dots)
   + wordmark/tagline left; connection pill right (`conn-icon` + `#connect`).
 - Segmented tab control (Create invoice / Pay invoice) as a 2-column grid in a
-  recessed cream strip; active tab lifts onto white with a green label.
+  recessed cream strip with an ink border; active tab fills green with white
+  text and a 2px offset shadow.
 - Form fields: label + optional hint on one row (`.field-head`), inputs with
   11px padding, 11px radius, cream fill, green focus ring.
 - Amount field: affixed prefix (`$` or `FXRP`) in orange with live USD hint

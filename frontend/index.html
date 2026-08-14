@@ -34,9 +34,7 @@
   html, body { margin: 0; padding: 0; }
   body {
     font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background:
-      radial-gradient(900px 480px at 50% -12%, rgba(46, 107, 78, 0.06), transparent 62%),
-      var(--bg);
+    background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -63,10 +61,11 @@
   .brand { display: flex; align-items: center; gap: 11px; }
   .brand-mark {
     width: 34px; height: 34px;
-    border-radius: 10px;
+    border-radius: 6px;
     display: grid; place-items: center;
     background: var(--green);
-    box-shadow: 0 3px 10px rgba(46, 107, 78, 0.28);
+    border: 2px solid #1c5a42;
+    box-shadow: 3px 3px 0 rgba(31, 42, 35, 0.18);
   }
   .brand-mark svg { display: block; }
   .brand-name { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
@@ -75,9 +74,9 @@
   .conn { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .conn-icon { display: grid; place-items: center; color: var(--muted); flex: none; }
   #connect {
-    appearance: none; border: 1px solid var(--line2); background: var(--bg1); color: var(--text);
+    appearance: none; border: 2px solid var(--line2); background: var(--bg1); color: var(--text);
     font: 600 13px/1 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
-    padding: 8px 13px; border-radius: 999px; cursor: pointer;
+    padding: 8px 13px; border-radius: 6px; cursor: pointer;
     font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     max-width: 150px;
     transition: background 0.16s, border-color 0.16s;
@@ -89,10 +88,10 @@
   /* ── Card ──────────────────────────────────────────── */
   .panel {
     background: var(--bg1);
-    border: 1px solid var(--line);
-    border-radius: 18px;
+    border: 2px solid var(--text);
+    border-radius: 10px;
     padding: 20px 18px 22px;
-    box-shadow: 0 1px 2px var(--shadow-k), 0 18px 40px rgba(53, 60, 48, 0.08);
+    box-shadow: 6px 6px 0 rgba(31, 42, 35, 0.16);
     animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   @keyframes rise {
@@ -104,11 +103,11 @@
   .nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    padding: 4px;
+    gap: 6px;
+    padding: 6px;
     background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 12px;
+    border: 2px solid var(--text);
+    border-radius: 8px;
     margin-bottom: 18px;
   }
   .nav a {
@@ -116,13 +115,13 @@
     color: var(--muted);
     text-decoration: none;
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 8px 10px;
-    border-radius: 9px;
+    border-radius: 4px;
     transition: color 0.15s, background 0.15s;
   }
   .nav a:hover { color: var(--text2); }
-  .nav a.active { background: var(--bg1); color: var(--green); box-shadow: 0 1px 3px rgba(53, 60, 48, 0.12); }
+  .nav a.active { background: var(--green); color: #fff; box-shadow: 2px 2px 0 rgba(31, 42, 35, 0.18); }
   .nav a:focus-visible { outline: 2px solid var(--ring); outline-offset: 0; }
 
   /* ── Fields ────────────────────────────────────────── */
@@ -138,8 +137,8 @@
     width: 100%;
     padding: 11px 12px;
     background: var(--bg2);
-    border: 1px solid var(--line2);
-    border-radius: 11px;
+    border: 2px solid var(--text);
+    border-radius: 6px;
     color: var(--text);
     font: 14px/1.4 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     transition: border-color 0.15s, box-shadow 0.15s;
@@ -149,7 +148,7 @@
   input:focus {
     outline: none;
     border-color: var(--green);
-    box-shadow: 0 0 0 3px var(--ring);
+    box-shadow: 3px 3px 0 rgba(46, 107, 78, 0.25);
   }
   input.mono { font-family: var(--mono); font-size: 13px; letter-spacing: 0; }
   .addr-warn { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin-top: -8px; }
@@ -158,13 +157,13 @@
     width: 100%;
     padding: 11px 34px 11px 12px;
     background: var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237c887e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
-    border: 1px solid var(--line2);
-    border-radius: 11px;
+    border: 2px solid var(--text);
+    border-radius: 6px;
     color: var(--text);
     font: 14px/1.4 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-appearance: none; appearance: none; cursor: pointer;
   }
-  select:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--ring); }
+  select:focus { outline: none; border-color: var(--green); box-shadow: 3px 3px 0 rgba(46, 107, 78, 0.25); }
 
   .input-affix { position: relative; }
   .input-affix .prefix {
@@ -176,17 +175,17 @@
   .chip-row { display: flex; gap: 8px; margin-top: 8px; }
   .chip {
     appearance: none;
-    border: 1px solid var(--line2);
+    border: 2px solid var(--text);
     background: var(--bg2);
     color: var(--text2);
     font: 600 11.5px/1 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     font-variant-numeric: tabular-nums;
   }
-  .chip:hover { background: var(--bg3); color: var(--text); border-color: var(--green); }
+  .chip:hover { background: var(--green); color: #fff; border-color: var(--green); box-shadow: 2px 2px 0 rgba(31, 42, 35, 0.18); }
   .chip:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
   /* ── Buttons ───────────────────────────────────────── */
@@ -195,19 +194,19 @@
     width: 100%;
     display: flex; align-items: center; justify-content: center; gap: 9px;
     padding: 13px 16px;
-    border: 0;
-    border-radius: 12px;
+    border: 2px solid #1c5a42;
+    border-radius: 6px;
     background: var(--green);
     color: #fff;
     font: 700 15px/1.2 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     letter-spacing: -0.005em;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(46, 107, 78, 0.28);
+    box-shadow: 3px 3px 0 rgba(31, 42, 35, 0.2);
     transition: background 0.16s, transform 0.06s, box-shadow 0.16s;
     margin-top: 6px;
   }
   .btn:hover { background: var(--green-hi); }
-  .btn:active { transform: scale(0.99); }
+  .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(31, 42, 35, 0.2); }
   .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
   .btn .spin { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: turn 0.7s linear infinite; }
@@ -215,16 +214,16 @@
 
   .btn-ghost {
     appearance: none;
-    border: 1px solid var(--line2);
+    border: 2px solid var(--text);
     background: var(--bg2);
     color: var(--text2);
     font: 600 13.5px/1.2 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     padding: 10px 14px;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
-  .btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--green); }
+  .btn-ghost:hover { background: var(--green); color: #fff; border-color: var(--green); box-shadow: 2px 2px 0 rgba(31, 42, 35, 0.18); }
   .btn-ghost:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
   /* ── Status line ───────────────────────────────────── */
@@ -245,8 +244,8 @@
     display: none;
     margin-top: 14px;
     background: var(--bg);
-    border: 1px solid var(--line2);
-    border-radius: 12px;
+    border: 2px solid var(--text);
+    border-radius: 8px;
     overflow: hidden;
   }
   .paylink {
@@ -264,22 +263,22 @@
   .copy-btn {
     appearance: none;
     display: inline-flex; align-items: center; gap: 6px;
-    border: 1px solid var(--line2);
+    border: 2px solid var(--text);
     background: var(--bg1);
     color: var(--text2);
     font: 600 12.5px/1 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     padding: 7px 11px;
-    border-radius: 9px;
+    border-radius: 4px;
     cursor: pointer;
   }
-  .copy-btn:hover { color: var(--green); border-color: var(--green); }
+  .copy-btn:hover { color: #fff; border-color: var(--green); background: var(--green); }
 
   /* ── Invoice card ──────────────────────────────────── */
   .invoice-card {
     display: none;
     margin-top: 16px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    border: 2px solid var(--text);
+    border-radius: 8px;
     background: var(--bg);
     overflow: hidden;
   }
@@ -287,7 +286,7 @@
   .status-pill {
     display: inline-flex; align-items: center; gap: 7px;
     font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
-    padding: 4px 9px; border-radius: 999px;
+    padding: 4px 9px; border-radius: 3px;
   }
   .invoice-card[data-state="paid"] .status-pill { color: var(--ok); background: rgba(47, 143, 91, 0.12); }
   .invoice-card[data-state="open"] .status-pill { color: var(--orange-deep); background: rgba(224, 139, 60, 0.14); }
@@ -335,14 +334,14 @@
     width: 100%;
     max-width: 380px;
     background: var(--bg1);
-    border: 1px solid var(--line);
-    border-radius: 18px;
+    border: 2px solid var(--text);
+    border-radius: 10px;
     padding: 22px;
-    box-shadow: 0 24px 56px rgba(38, 44, 36, 0.24);
+    box-shadow: 6px 6px 0 rgba(38, 44, 36, 0.22);
     animation: rise 260ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .wallet-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-  .wallet-head .icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--green); color: #fff; flex: none; }
+  .wallet-head .icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 6px; background: var(--green); border: 2px solid #1c5a42; color: #fff; flex: none; }
   .wallet-card h3 { margin: 0; font-size: 16.5px; font-weight: 700; color: var(--text); }
   .muted { color: var(--muted); font-size: 12.5px; margin: 2px 0 14px; }
   #walletList { display: flex; flex-direction: column; gap: 8px; }
@@ -351,15 +350,15 @@
     display: flex; align-items: center; gap: 12px;
     width: 100%;
     padding: 11px 13px;
-    border: 1px solid var(--line2);
-    border-radius: 12px;
+    border: 2px solid var(--text);
+    border-radius: 6px;
     background: var(--bg2);
     color: var(--text);
     font: 600 14px/1.2 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s;
   }
-  .wallet-btn:hover { background: var(--bg3); border-color: var(--green); }
+  .wallet-btn:hover { background: var(--green); color: #fff; border-color: var(--green); box-shadow: 2px 2px 0 rgba(31, 42, 35, 0.18); }
   .wallet-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 0; }
   .wallet-icon { width: 26px; height: 26px; border-radius: 6px; flex: none; }
   .wallet-btn .go { margin-left: auto; color: var(--muted); display: grid; place-items: center; }
@@ -367,9 +366,9 @@
     color: var(--danger);
     font-size: 12.5px; line-height: 1.5;
     padding: 11px 12px;
-    border: 1px solid rgba(196, 82, 63, 0.35);
+    border: 2px solid var(--danger);
     background: rgba(196, 82, 63, 0.08);
-    border-radius: 10px;
+    border-radius: 6px;
     word-break: break-word;
     white-space: pre-line;
   }
@@ -396,8 +395,9 @@
     neon-crypto-default and the gimmick-dark look in favor of an honest,
     paper-and-garden palette.
   OWN-WORLD: warm white / beige canvas, one nature-green action accent, one
-    light-orange warmth accent, hairline 1px borders, tabular numerals,
-    system + mono pairs; the exchange feels grounded, not theatrical.
+    light-orange warmth accent, chunky 2px borders, hard offset shadows, tabular
+    numerals, system + mono pairs; a quiet brutalism — the exchange feels
+    grounded and direct, not theatrical.
   STORY: a merchant prices in USD, a wallet pays in FXRP, and the on-chain
     conversion via Flare FTSOv2 is legible at every step.
   FIRST VIEWPORT: brand lockup left, wallet pill right; one white panel
