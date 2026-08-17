@@ -127,12 +127,67 @@
   .btn-lg.ghost:hover { background: var(--bg3); }
 
   .hero-card {
+    position: relative;
+    overflow: hidden;
     background: var(--bg1);
     border: 2px solid var(--text);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 6px 6px 0 rgba(31, 42, 35, 0.16);
   }
+  .hero-card::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 14s linear infinite alternate;
+  }
+  @keyframes grain { to { background-position: 220px 140px; } }
+
+  /* ── Landing motion ────────────────────────────────── */
+  .hero > div:first-child > * {
+    opacity: 0;
+    animation: hero-in 620ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero > div:first-child > h1 { animation-delay: 60ms; }
+  .hero > div:first-child > .lede { animation-delay: 180ms; }
+  .hero > div:first-child > .hero-cta { animation-delay: 300ms; }
+  .hero-card {
+    opacity: 0;
+    animation: settle-in 700ms 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes settle-in {
+    from { opacity: 0; transform: translateY(22px) scale(0.985); box-shadow: 0 0 0 rgba(31, 42, 35, 0); }
+    to { opacity: 1; transform: translateY(0) scale(1); box-shadow: 6px 6px 0 rgba(31, 42, 35, 0.16); }
+  }
+  .live-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ok);
+    vertical-align: baseline;
+    animation: live-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(47, 143, 91, 0.4); }
+    55% { box-shadow: 0 0 0 6px rgba(47, 143, 91, 0); }
+  }
+  .hc-live { display: flex; align-items: center; gap: 7px; }
+  .step, .card, .ev-row {
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s;
+  }
+  .step:hover, .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 rgba(31, 42, 35, 0.18);
+    border-color: var(--green);
+  }
+  .ev-row:hover { border-color: var(--green); background: var(--bg3); }
   .hc-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .pill {
     display: inline-flex; align-items: center; gap: 7px;
@@ -618,7 +673,7 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         pay tx on explorer
       </a>
-      <div class="hc-live">LIVE · Coston2 · closed on-chain</div>
+      <div class="hc-live"><span class="live-dot"></span>LIVE · Coston2 · closed on-chain</div>
     </div>
   </section>
 
@@ -824,6 +879,25 @@
   </div>
 </div>
 
+<script>
+(function () {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var fx = document.querySelector(".hero-card .fx");
+  if (!fx) return;
+  var match = fx.textContent.match(/([\d.]+)/);
+  if (!match) return;
+  var end = parseFloat(match[1]);
+  var dec = (match[1].split(".")[1] || "").length;
+  var t0 = performance.now() + 1200, dur = 1400;
+  function step(now) {
+    var p = Math.min(1, Math.max(0, (now - t0) / dur));
+    var e = 1 - Math.pow(1 - p, 3);
+    fx.textContent = "→ " + (end * e).toFixed(dec) + " FXRP";
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+</script>
 <script src="app.js"></script>
 </body>
 </html>
