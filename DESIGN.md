@@ -38,18 +38,23 @@ the task (Operate mode).
 
 ## Composition & Layout
 
-- **Single page, landing first, app below the fold** (no redirects, no build):
-  a `.page` shell (max-width **920px**) carries the landing; the app stays in
-  the `.app` shell (max-width **520px**) with `id="launch"` so the hero CTA and
-  footer link scroll straight to it. Deep links (`#/pay?c=..&id=..`) still land
-  in the app panel.
-- Landing (Persuade surface, same visual world): two-column hero — headline +
-  CTA left, a **settled-invoice card** (real Coston2 data) right; then open
-  sections with generous vertical rhythm (72px): 01 How it works as an **unboxed
-  editorial flow** (three steps, thin top rules, no card containers), Why Flare
-  as **one prose paragraph**, Live on Coston2 as a **single evidence line** plus
-  a quiet mono address block, For developers as one code block; footer with
-  GitHub/contract/app links. No section numbers, no card-on-card stacking.
+- **Single page, product first, details last** (no redirects, no build): the
+  `.page` shell (max-width **920px**) carries a **centered hero** — one promise
+  (`h1`), one one-liner (`lede`), one CTA (`Launch the app`) with the
+  **settled-invoice card** (real Coston2 data) settling in below as the focal
+  proof. The working app follows immediately in the `.app` shell (max-width
+  **520px**) with `id="launch"`; deep links (`#/pay?c=..&id=..`) still land in
+  the app panel. All technical content (how it works, Why Flare, live evidence,
+  addresses, the three calls) lives **collapsed** in a single `Details for
+  builders` disclosure (`<details>`), and a quiet footer with GitHub/contract/
+  app links closes the page. Nothing interrupts the pitch; a judge expands the
+  disclosure in one click.
+- Landing (Persuade surface, same visual world): centered hero stack with big
+  display type and the invoice card as proof; the app is the product, not a
+  section; the builders disclosure reuses the unboxed editorial flow (three
+  steps, thin top rules, no card containers), one Why Flare prose paragraph,
+  one evidence line plus a quiet mono address block, and one code block. No
+  section numbers, no card-on-card stacking, no documentation in the scroll.
 - Header: brand mark (16px `X` in a green rounded square with two orange dots)
   + wordmark/tagline left; connection pill right (`conn-icon` + `#connect`),
   shared by landing and app.
@@ -71,8 +76,8 @@ the task (Operate mode).
 
 ## Type & Numbers
 
-- Landing display: hero 34–54px/800 with `-0.03em`, section titles 24px/800;
-  amounts on the invoice card 27px/800, `letter-spacing -0.02em`; body 14px;
+- Landing display: hero 38–64px/800 with `-0.03em`, centered, max-width 14ch;
+  amounts on the invoice card 26px/800, `letter-spacing -0.02em`; body 14px;
   labels 12.5px semibold; hints 12px muted; mono for all addresses, links, code.
 - `font-variant-numeric: tabular-nums` on all inputs, amounts, and the connect
   pill so balances and addresses align.
@@ -81,11 +86,14 @@ the task (Operate mode).
 
 ## Motion
 
-- One authored entrance: panel `rise` (8px → 0, 320ms cubic-bezier(.2,.7,.2,1));
-  wallet sheet repeats it lighter. Landing scroll is native smooth
-  (`scrollIntoView` on the hero CTA / footer anchors). Button `:active` scale
-  .99; loading spinner on `.btn .spin`. `prefers-reduced-motion: reduce` kills
-  all motion.
+- One authored entrance: hero children stagger in (headline → lede → CTA →
+  invoice card, `hero-in` 620ms cubic-bezier(.16,1,.3,1)); the invoice card's
+  FXRP amount **counts up** on load (respects reduced motion); LIVE dot pulses
+  (2.4s); paper grain drifts over the card (`14s`). Panel `rise` (8px → 0,
+  320ms) for app state changes; wallet sheet repeats it lighter. Landing scroll
+  is native smooth (`scrollIntoView` on the hero CTA / footer anchors). Button
+  `:active` scale .99; loading spinner on `.btn .spin`.
+  `prefers-reduced-motion: reduce` kills all motion.
 
 ## States
 
@@ -98,14 +106,15 @@ the task (Operate mode).
 
 ## Responsive
 
-- Landing hero collapses to one column ≤700px; `.page` and `.app` shells scale
-  by max-width. Media query ≥720px bumps top padding.
+- Landing hero is a centered stack (headline, lede, CTA, card) with the card
+  capped at 400px; `.page` and `.app` shells scale by max-width. Media query
+  ≥720px bumps top padding.
 - Touch-friendly hit targets (≥40px). Works offline; vendor ethers locally.
 
 ## Non-Negotiables
 
 - All functionality and deployed addresses preserved; every functional ID the
-  app.js references is present and reachable (verified: 28/28).
+  app.js references is present and reachable (verified: 33/33).
 - No gradient text, no glass-as-decoration, no emoji as icons (SVG inline
   system only). Landing claims are backed by real on-chain evidence, linked to
   the explorer.
