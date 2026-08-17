@@ -179,15 +179,7 @@
     55% { box-shadow: 0 0 0 6px rgba(47, 143, 91, 0); }
   }
   .hc-live { display: flex; align-items: center; gap: 7px; }
-  .step, .card, .ev-row {
-    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s;
-  }
-  .step:hover, .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 6px 6px 0 rgba(31, 42, 35, 0.18);
-    border-color: var(--green);
-  }
-  .ev-row:hover { border-color: var(--green); background: var(--bg3); }
+  .hc-link, .onchain a { transition: color 0.15s; }
   .hc-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .pill {
     display: inline-flex; align-items: center; gap: 7px;
@@ -209,59 +201,27 @@
   .hc-live { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line2); font: 600 11px var(--mono); color: var(--muted); }
 
   /* ── Landing: sections ─────────────────────────────── */
-  .sec { padding: 40px 0 8px; border-top: 2px solid var(--text); }
-  .sec h2 { margin: 0 0 8px; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
-  .sec > .sub { margin: 0 0 24px; font-size: 14.5px; color: var(--text2); max-width: 56ch; line-height: 1.55; }
-  .sec-num { color: var(--orange-deep); font-family: var(--mono); font-size: 13px; font-weight: 600; margin-right: 8px; }
+  .sec { padding: 72px 0 16px; border-top: 2px solid var(--text); }
+  .sec h2 { margin: 0 0 14px; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .sec > .sub { margin: 0 0 36px; font-size: 15px; color: var(--text2); max-width: 54ch; line-height: 1.6; }
 
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 700px) { .steps { grid-template-columns: 1fr; } }
-  .step {
-    background: var(--bg1);
-    border: 2px solid var(--text);
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 4px 4px 0 rgba(31, 42, 35, 0.14);
-  }
-  .step-num {
-    display: inline-grid; place-items: center;
-    width: 26px; height: 26px;
-    background: var(--orange-soft); color: var(--orange-deep);
-    border: 2px solid var(--orange-deep); border-radius: 4px;
-    font: 700 12px var(--mono);
-    margin-bottom: 10px;
-  }
-  .step h3 { margin: 0 0 4px; font-size: 15px; font-weight: 800; }
-  .step p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--text2); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 40px; }
+  @media (max-width: 700px) { .steps { grid-template-columns: 1fr; gap: 34px; } }
+  .step { border-top: 2px solid var(--text); padding-top: 18px; }
+  .step-num { font: 700 12px var(--mono); color: var(--orange-deep); }
+  .step h3 { margin: 10px 0 6px; font-size: 16px; font-weight: 800; }
+  .step p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text2); max-width: 30ch; }
 
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--bg1);
-    border: 2px solid var(--line2);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .card h3 { margin: 0 0 6px; font-size: 13.5px; font-weight: 800; }
-  .card h3 .tag { color: var(--orange-deep); font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em; }
-  .card p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--text2); }
+  .flare-prose { max-width: 62ch; font-size: 16px; line-height: 1.7; color: var(--text2); }
+  .flare-prose b { color: var(--text); font-weight: 700; }
+  .flare-prose code { font-family: var(--mono); font-size: 0.85em; color: var(--orange-deep); }
 
-  .ev-rows { margin-bottom: 16px; }
-  .ev-row {
-    display: flex; align-items: baseline; gap: 12px;
-    background: var(--bg1);
-    border: 2px solid var(--line2);
-    border-radius: 6px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-  }
-  .ev-row .who { font: 600 12px var(--mono); color: var(--muted); flex: none; width: 92px; }
-  .ev-row .what { flex: 1; font-size: 13.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .ev-row .what .fx { color: var(--green); }
-  .ev-row a { font: 600 12px var(--mono); color: var(--green); text-decoration: none; white-space: nowrap; }
-  .ev-row a:hover { text-decoration: underline; }
+  .onchain { margin-bottom: 20px; font-size: 14.5px; line-height: 1.7; color: var(--text2); }
+  .onchain a { color: var(--green); font-weight: 600; text-decoration: none; }
+  .onchain a:hover { text-decoration: underline; }
+  .onchain .fx { color: var(--green); font-weight: 700; font-variant-numeric: tabular-nums; }
 
-  .addrs { background: var(--bg2); border: 2px dashed var(--line2); border-radius: 8px; padding: 14px 16px; }
+  .addrs { padding: 14px 16px; }
   .addr-row { display: flex; gap: 10px; padding: 3px 0; font-size: 12px; }
   .addr-row .lbl { font-weight: 600; color: var(--text2); flex: none; min-width: 74px; }
   .addr-row code { font-family: var(--mono); color: var(--muted); word-break: break-all; }
@@ -678,7 +638,7 @@
   </section>
 
   <section class="sec" id="how">
-    <h2><span class="sec-num">01</span>How it works</h2>
+    <h2>How it works</h2>
     <p class="sub">One open contract, three calls. The full loop runs on-chain: create, pay, withdraw.</p>
     <div class="steps">
       <div class="step">
@@ -700,44 +660,13 @@
   </section>
 
   <section class="sec" id="why-flare">
-    <h2><span class="sec-num">02</span>Why Flare</h2>
-    <p class="sub">Rowan only works because Flare settles the whole loop natively.</p>
-    <div class="cards">
-      <div class="card">
-        <h3>FAssets · <span class="tag">FXRP</span></h3>
-        <p>Invoices settle in FXRP, the FAsset that makes XRP spendable in EVM DeFi: the interoperable asset Bounty&nbsp;1 is about.</p>
-      </div>
-      <div class="card">
-        <h3>FTSOv2 <span class="tag">ORACLE</span></h3>
-        <p><code>getFeedByIdInWei(XRP/USD)</code> converts USD amounts at payment time; the fee is paid in FLR and excess refunded atomically.</p>
-      </div>
-      <div class="card">
-        <h3>Portable <span class="tag">NETWORKS</span></h3>
-        <p>One constructor arg (the FTSOv2 address). The same contract deploys to Coston2, Songbird, and Flare Mainnet unchanged.</p>
-      </div>
-    </div>
+    <h2>Why Flare</h2>
+    <p class="flare-prose">Invoices settle in <b>FXRP</b>, the FAsset that makes XRP spendable in EVM&nbsp;DeFi. USD amounts convert at payment time via <b>FTSOv2</b>&nbsp;&mdash; <code>getFeedByIdInWei(XRP/USD)</code>&nbsp;&mdash; with the fee paid in FLR and excess refunded atomically. One constructor arg ports the same contract to Coston2, Songbird, and Flare Mainnet unchanged.</p>
   </section>
 
   <section class="sec" id="evidence">
-    <h2><span class="sec-num">03</span>Live on Coston2</h2>
-    <p class="sub">The full create → pay → withdraw flow has been run live during the program.</p>
-    <div class="ev-rows">
-      <div class="ev-row">
-        <span class="who">Invoice #4</span>
-        <span class="what">$50.00 → <span class="fx">49.943 FXRP</span></span>
-        <a href="https://coston2-explorer.flare.network/tx/0x8890dcb5bc8e77cb9cdb04951f0c0a01bc68f2390e18bf92fbaf88135418e7ce" target="_blank" rel="noopener">pay tx ↗</a>
-      </div>
-      <div class="ev-row">
-        <span class="who">Invoice #0</span>
-        <span class="what">$20.00 → <span class="fx">19.81 FXRP</span></span>
-        <span class="what fx" style="font-weight:600;">closed</span>
-      </div>
-      <div class="ev-row">
-        <span class="who">Mint</span>
-        <span class="what">Test FXRP minted</span>
-        <a href="https://coston2-explorer.flare.network/tx/0xeaf237c1cc88242a3db904ab214a516ae57f52006a51e424567b95fc97cb3494" target="_blank" rel="noopener">tx ↗</a>
-      </div>
-    </div>
+    <h2>Live on Coston2</h2>
+    <p class="onchain">The full create &rarr; pay &rarr; withdraw flow has been run live. Invoice&nbsp;#4 settled <span class="fx">49.943 FXRP</span> for $50.00 (<a href="https://coston2-explorer.flare.network/tx/0x8890dcb5bc8e77cb9cdb04951f0c0a01bc68f2390e18bf92fbaf88135418e7ce" target="_blank" rel="noopener">pay tx</a>), and invoice&nbsp;#0 settled <span class="fx">19.81 FXRP</span> for $20.00.</p>
     <div class="addrs">
       <div class="addr-row"><span class="lbl">FxrpPay</span><code>0x29A63685474814fdaE2396251E1190aAF44aff72</code></div>
       <div class="addr-row"><span class="lbl">MockFXRP</span><code>0x40bE15A4469DCF86d4CB07059A137f2611867739</code></div>
@@ -746,7 +675,7 @@
   </section>
 
   <section class="sec" id="builders">
-    <h2><span class="sec-num">04</span>For developers</h2>
+    <h2>For developers</h2>
     <p class="sub">Any EVM app can accept FXRP payments: one public contract, three calls, no server to run.</p>
     <pre class="codeblock"><span class="cm">// merchant</span>
 <span class="fn">createInvoice</span>(payee, token, pricing, amount, memo)

@@ -44,10 +44,12 @@ the task (Operate mode).
   footer link scroll straight to it. Deep links (`#/pay?c=..&id=..`) still land
   in the app panel.
 - Landing (Persuade surface, same visual world): two-column hero — headline +
-  CTA left, a **settled-invoice card** (real Coston2 data) right; then numbered
-  sections 01 How it works (3 step cards), 02 Why Flare (3 primitive cards),
-  03 Live on Coston2 (evidence rows + mono address block), 04 For developers
-  (code block + link format); footer with GitHub/contract/app links.
+  CTA left, a **settled-invoice card** (real Coston2 data) right; then open
+  sections with generous vertical rhythm (72px): 01 How it works as an **unboxed
+  editorial flow** (three steps, thin top rules, no card containers), Why Flare
+  as **one prose paragraph**, Live on Coston2 as a **single evidence line** plus
+  a quiet mono address block, For developers as one code block; footer with
+  GitHub/contract/app links. No section numbers, no card-on-card stacking.
 - Header: brand mark (16px `X` in a green rounded square with two orange dots)
   + wordmark/tagline left; connection pill right (`conn-icon` + `#connect`),
   shared by landing and app.
