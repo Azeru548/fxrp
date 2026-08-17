@@ -6,6 +6,9 @@ Last updated: Aug 14, 2026. Scratch notes to resume work quickly.
 
 - Demo recorded (video being edited), README + SUBMISSION.md updated with live
   on-chain evidence, repo pushed to `github.com/Azeru548/fxrp`.
+- Landing page added: single page, landing first, app below the fold (`#launch`),
+  with hero + settled-invoice card, How it works, Why Flare, Live on Coston2
+  evidence, For developers, footer. Deep links unchanged.
 - Remaining: paste demo video link into SUBMISSION.md §5, then submit.
 
 ## Deployed contracts (Coston2)

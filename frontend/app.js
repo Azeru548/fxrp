@@ -180,6 +180,8 @@ async function connectWith(ep) {
   $("app").style.display = "block";
   $("payee").placeholder = account;
   $("footnote").style.display = "block";
+  const appHint = document.getElementById("appHint");
+  if (appHint) appHint.style.display = "none";
   setStatus("Connected: " + account, true);
   closeWalletModal();
 }
@@ -191,6 +193,17 @@ function renderWalletError(msg) {
   list.prepend(div);
 }
 $("connect").onclick = openWalletModal;
+
+window.launchApp = function () {
+  document.getElementById("launch").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!provider) openWalletModal();
+  return false;
+};
+
+window.scrollToId = function (id) {
+  document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+  return false;
+};
 
 $("pricing").onchange = () => {
   $("amountPrefix").textContent = $("pricing").value === "1" ? "$" : "FXRP";

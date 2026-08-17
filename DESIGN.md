@@ -38,10 +38,19 @@ the task (Operate mode).
 
 ## Composition & Layout
 
-- Max-width **520px** single-column shell centered; generous vertical rhythm
-  on desktop (34px top padding), mobile-first 20px.
+- **Single page, landing first, app below the fold** (no redirects, no build):
+  a `.page` shell (max-width **920px**) carries the landing; the app stays in
+  the `.app` shell (max-width **520px**) with `id="launch"` so the hero CTA and
+  footer link scroll straight to it. Deep links (`#/pay?c=..&id=..`) still land
+  in the app panel.
+- Landing (Persuade surface, same visual world): two-column hero — headline +
+  CTA left, a **settled-invoice card** (real Coston2 data) right; then numbered
+  sections 01 How it works (3 step cards), 02 Why Flare (3 primitive cards),
+  03 Live on Coston2 (evidence rows + mono address block), 04 For developers
+  (code block + link format); footer with GitHub/contract/app links.
 - Header: brand mark (16px `X` in a green rounded square with two orange dots)
-  + wordmark/tagline left; connection pill right (`conn-icon` + `#connect`).
+  + wordmark/tagline left; connection pill right (`conn-icon` + `#connect`),
+  shared by landing and app.
 - Segmented tab control (Create invoice / Pay invoice) as a 2-column grid in a
   recessed cream strip with an ink border; active tab fills green with white
   text and a 2px offset shadow.
@@ -60,8 +69,9 @@ the task (Operate mode).
 
 ## Type & Numbers
 
-- Display amounts: 27px/800, `letter-spacing -0.02em`; body 14px; labels 12.5px
-  semibold; hints 12px muted.
+- Landing display: hero 34–54px/800 with `-0.03em`, section titles 24px/800;
+  amounts on the invoice card 27px/800, `letter-spacing -0.02em`; body 14px;
+  labels 12.5px semibold; hints 12px muted; mono for all addresses, links, code.
 - `font-variant-numeric: tabular-nums` on all inputs, amounts, and the connect
   pill so balances and addresses align.
 - Status/messages: success green (`.ok`), danger red (`.err`), in-progress
@@ -70,8 +80,10 @@ the task (Operate mode).
 ## Motion
 
 - One authored entrance: panel `rise` (8px → 0, 320ms cubic-bezier(.2,.7,.2,1));
-  wallet sheet repeats it lighter. Button `:active` scale .99; loading spinner
-  on `.btn .spin`. `prefers-reduced-motion: reduce` kills all motion.
+  wallet sheet repeats it lighter. Landing scroll is native smooth
+  (`scrollIntoView` on the hero CTA / footer anchors). Button `:active` scale
+  .99; loading spinner on `.btn .spin`. `prefers-reduced-motion: reduce` kills
+  all motion.
 
 ## States
 
@@ -84,12 +96,14 @@ the task (Operate mode).
 
 ## Responsive
 
-- Single column scales by max-width + media query (≥640px bumps top padding).
+- Landing hero collapses to one column ≤700px; `.page` and `.app` shells scale
+  by max-width. Media query ≥720px bumps top padding.
 - Touch-friendly hit targets (≥40px). Works offline; vendor ethers locally.
 
 ## Non-Negotiables
 
 - All functionality and deployed addresses preserved; every functional ID the
-  app.js references is present and reachable.
-- No gradient text, no glass-as-decoration, no hard offset shadows, no emoji
-  as icons (SVG inline system only).
+  app.js references is present and reachable (verified: 28/28).
+- No gradient text, no glass-as-decoration, no emoji as icons (SVG inline
+  system only). Landing claims are backed by real on-chain evidence, linked to
+  the explorer.
