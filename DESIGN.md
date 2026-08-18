@@ -38,23 +38,22 @@ the task (Operate mode).
 
 ## Composition & Layout
 
-- **Single page, product first, details last** (no redirects, no build): the
-  `.page` shell (max-width **920px**) carries a **centered hero** — one promise
-  (`h1`), one one-liner (`lede`), one CTA (`Launch the app`) with the
-  **settled-invoice card** (real Coston2 data) settling in below as the focal
-  proof. The working app follows immediately in the `.app` shell (max-width
-  **520px**) with `id="launch"`; deep links (`#/pay?c=..&id=..`) still land in
-  the app panel. All technical content (how it works, Why Flare, live evidence,
-  addresses, the three calls) lives **collapsed** in a single `Details for
-  builders` disclosure (`<details>`), and a quiet footer with GitHub/contract/
-  app links closes the page. Nothing interrupts the pitch; a judge expands the
-  disclosure in one click.
-- Landing (Persuade surface, same visual world): centered hero stack with big
-  display type and the invoice card as proof; the app is the product, not a
-  section; the builders disclosure reuses the unboxed editorial flow (three
-  steps, thin top rules, no card containers), one Why Flare prose paragraph,
-  one evidence line plus a quiet mono address block, and one code block. No
-  section numbers, no card-on-card stacking, no documentation in the scroll.
+- **Single page, product first, sections spaced** (no redirects, no build):
+  the `.page` shell (max-width **920px**) carries the landing. A **split hero** —
+  left-aligned headline + one-liner + two CTAs + a live proof line, with the
+  **settled-invoice card** (real Coston2 data) right — is followed by a
+  full-width **proof band** (LIVE pulse + live stats: invoices settled, FXRP
+  settled, custody, explorer link) separated by 2px rules. The working app
+  follows in the `.app` shell (max-width **520px**) with `id="launch"`; deep
+  links (`#/pay?c=..&id=..`) still land in the app panel.
+- Landing (Persuade surface, same visual world): four clearly separated sections
+  — How it works (unboxed editorial flow, three steps with thin top rules),
+  Why Flare (one prose paragraph + a three-fact row: FAssets / FTSOv2 /
+  Portable), Live on Coston2 (evidence line + a bordered address card), For
+  developers (one code block + link format). Each section opens with a mono
+  kicker and its own 2px top rule for rhythm; cards only where they earn it (the
+  hero invoice card, the address block, the code block). No card-on-card
+  stacking, no section numbers.
 - Header: brand mark (16px `X` in a green rounded square with two orange dots)
   + wordmark/tagline left; connection pill right (`conn-icon` + `#connect`),
   shared by landing and app.
@@ -76,9 +75,10 @@ the task (Operate mode).
 
 ## Type & Numbers
 
-- Landing display: hero 38–64px/800 with `-0.03em`, centered, max-width 14ch;
-  amounts on the invoice card 26px/800, `letter-spacing -0.02em`; body 14px;
-  labels 12.5px semibold; hints 12px muted; mono for all addresses, links, code.
+- Landing display: hero 36–60px/800 with `-0.03em`, left-aligned in a split
+  column; section titles 28px/800; amounts on the invoice card 26px/800,
+  `letter-spacing -0.02em`; body 14px; labels 12.5px semibold; hints 12px
+  muted; mono for all addresses, links, code, and section kickers.
 - `font-variant-numeric: tabular-nums` on all inputs, amounts, and the connect
   pill so balances and addresses align.
 - Status/messages: success green (`.ok`), danger red (`.err`), in-progress
@@ -86,14 +86,14 @@ the task (Operate mode).
 
 ## Motion
 
-- One authored entrance: hero children stagger in (headline → lede → CTA →
-  invoice card, `hero-in` 620ms cubic-bezier(.16,1,.3,1)); the invoice card's
-  FXRP amount **counts up** on load (respects reduced motion); LIVE dot pulses
-  (2.4s); paper grain drifts over the card (`14s`). Panel `rise` (8px → 0,
-  320ms) for app state changes; wallet sheet repeats it lighter. Landing scroll
-  is native smooth (`scrollIntoView` on the hero CTA / footer anchors). Button
-  `:active` scale .99; loading spinner on `.btn .spin`.
-  `prefers-reduced-motion: reduce` kills all motion.
+- One authored entrance: hero copy children stagger in (headline → lede → CTAs →
+  proof line, `hero-in` 620ms cubic-bezier(.16,1,.3,1)) and the invoice card
+  settles in on the right; the card's FXRP amount **counts up** on load
+  (respects reduced motion); LIVE dots pulse (2.4s); paper grain drifts over
+  the card (`14s`). Panel `rise` (8px → 0, 320ms) for app state changes; wallet
+  sheet repeats it lighter. Landing scroll is native smooth (`scrollIntoView`
+  on the hero CTAs / footer anchors). Button `:active` scale .99; loading
+  spinner on `.btn .spin`. `prefers-reduced-motion: reduce` kills all motion.
 
 ## States
 
@@ -106,9 +106,9 @@ the task (Operate mode).
 
 ## Responsive
 
-- Landing hero is a centered stack (headline, lede, CTA, card) with the card
-  capped at 400px; `.page` and `.app` shells scale by max-width. Media query
-  ≥720px bumps top padding.
+- Landing hero is a split grid that collapses to one column ≤820px (copy
+  centered); the proof band wraps its stats; `.page` and `.app` shells scale by
+  max-width. Media query ≥720px bumps top padding.
 - Touch-friendly hit targets (≥40px). Works offline; vendor ethers locally.
 
 ## Non-Negotiables
