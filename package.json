@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "check": "node scripts/compile-check.js",
-    "test": "node scripts/compile-check.js"
+    "test": "node scripts/compile-check.js",
+    "sdk:build": "node sdk/scripts/build.cjs",
+    "sdk:gen-abi": "node sdk/scripts/gen-abi.cjs",
+    "sdk:smoke": "node sdk/scripts/smoke.mjs"
   },
   "devDependencies": {
     "@flarenetwork/flare-periphery-contracts": "^0.1.52",

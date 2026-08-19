@@ -1,0 +1,33 @@
+{
+  "name": "@rowan/fxrp-pay-sdk",
+  "version": "0.1.0",
+  "description": "Typed SDK for Rowan (FxrpPay) — pay with XRP, settle on Flare. Create invoices, pay links, and withdraw FXRP from any EVM app.",
+  "license": "MIT",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "abi"
+  ],
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "gen:abi": "node scripts/gen-abi.cjs",
+    "typecheck": "tsc --noEmit -p tsconfig.esm.json",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "peerDependencies": {
+    "ethers": "^6.0.0"
+  },
+  "devDependencies": {
+    "ethers": "^6.17.0",
+    "typescript": "^7.0.2"
+  }
+}

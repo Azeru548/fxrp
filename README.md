@@ -60,6 +60,10 @@ contracts/
 frontend/
   index.html     # Static payment-link app (no build step)
   app.js
+sdk/
+  src/           # @rowan/fxrp-pay-sdk — typed TypeScript SDK (see sdk/README.md)
+  abi/           # Generated machine-readable ABI (FxrpPay.json)
+  scripts/       # build (ESM+CJS), gen-abi, live smoke test
 scripts/
   compile-check.js  # Local syntax/compile verification via solc
 ```
@@ -117,6 +121,40 @@ addresses are pre-filled, so you only need to connect a wallet.
 
 ## Integrate into your app
 
+There are two integration paths — a **typed SDK** (recommended) or the raw
+contract.
+
+### Typed SDK (`sdk/`)
+
+`@rowan/fxrp-pay-sdk` wraps the contract with TypeScript types, auto-approval,
+oracle-fee handling, and payment-link helpers. ESM + CJS, ethers v6 peer dep.
+See [`sdk/README.md`](sdk/README.md).
+
+```bash
+npm install @rowan/fxrp-pay-sdk ethers
+```
+
+```ts
+import { FxrpPayClient, PRICING_USD } from "@rowan/fxrp-pay-sdk";
+
+// Merchant: create a $49.99 invoice and get its payment link
+const client = await FxrpPayClient.fromBrowserProvider(window.ethereum);
+const { id, link } = await client.createInvoice({
+  pricing: PRICING_USD,
+  amount: "4999",
+  memo: "Order #1234",
+}); // link === "#/pay?c=0x29A6...&id=7"
+
+// Payer: pay it in one click (auto-approves, sends oracle fee)
+const result = await client.pay(id);
+console.log("Paid!", result.totalPaid, "tx:", result.txHash);
+
+// Merchant: withdraw collected FXRP
+await client.withdraw(id);
+```
+
+### Raw contract
+
 Everything is one public contract with three calls, so any EVM app can accept
 FXRP payments without running infrastructure:
 
@@ -128,7 +166,8 @@ FXRP payments without running infrastructure:
 The **payment link is the integration point**: link format
 `#/pay?c=<FxrpPay address>&id=<invoice id>`. Drop it into any checkout, email,
 or QR code — the payer lands in Rowan with the invoice pre-loaded and pays in
-one click. The ABI lives in `frontend/app.js`. No server or API to run.
+one click. Machine-readable ABI: `sdk/abi/FxrpPay.json`. No server or API to
+run.
 
 ## Next steps / roadmap
 
